@@ -9,13 +9,13 @@ public class CustomCoventionalMiddleware
     _next = next;
   }
 
-  public async Task Ivoke(HttpContext httpContext)
+  public async Task Invoke(HttpContext httpContext)
   {
     if (httpContext.Request.Query.ContainsKey("firstname") && httpContext.Request.Query.ContainsKey("lastname"))
     {
       string fullName = httpContext.Request.Query["firstname"] + " " + httpContext.Request.Query["lastname"];
 
-      await httpContext.Response.WriteAsync(fullName);
+      await httpContext.Response.WriteAsync(fullName + '\n');
     }
     await _next(httpContext);
   }
