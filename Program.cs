@@ -1,22 +1,28 @@
-using WebApp.CustomMiddleware;
-
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddTransient<MyCustomMiddleware>();
+
 var app = builder.Build();
 
-app.Use(async (HttpContext context, RequestDelegate next) =>
+app.Use(async (context, next) =>
 {
-  await context.Response.WriteAsync("Hi I'm from Middleware 1\n");
+  await context.Response.WriteAsync("I'm the First Middleware\n");
   await next(context);
 });
 
-// app.UseMiddleware<MyCustomMiddleware>();
-// app.UseMyCustomMiddleware();
-app.UseCustomConventionalMiddleware();
+app.UseWhen(
+  context => context.Request.Query.ContainsKey("username"),
+  app =>
+  {
+    app.Use(async (context, next) =>
+    {
+      await context.Response.WriteAsync("I'm from UseWhen middleware!\n");
+      await next(context);
+    });
+  }
+);
 
-app.Run(async (HttpContext context) =>
+app.Run(async context =>
 {
-  await context.Response.WriteAsync("\nHi I'm the terminator Middleware from app.Run()");
+  await context.Response.WriteAsync("Hello from middleware at main chain.");
 });
 
 app.Run();
