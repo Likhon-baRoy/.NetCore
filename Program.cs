@@ -1,28 +1,25 @@
 var builder = WebApplication.CreateBuilder(args);
-
 var app = builder.Build();
 
-app.Use(async (context, next) =>
+app.MapGet("/", async context =>
 {
-  await context.Response.WriteAsync("I'm the First Middleware\n");
-  await next(context);
+  await context.Response.WriteAsync("This is Home route\n");
 });
 
-app.UseWhen(
-  context => context.Request.Query.ContainsKey("username"),
-  app =>
-  {
-    app.Use(async (context, next) =>
-    {
-      await context.Response.WriteAsync("I'm from UseWhen middleware!\n");
-      await next(context);
-    });
-  }
-);
-
-app.Run(async context =>
+app.MapGet("/map", async context =>
 {
-  await context.Response.WriteAsync("Hello from middleware at main chain.");
+  await context.Response.WriteAsync("This is Map route\n");
+});
+
+app.MapGet("/about", async context =>
+{
+  await context.Response.WriteAsync("This is About route\n");
+});
+
+// Fallback when no other route matches
+app.MapFallback(async context =>
+{
+  await context.Response.WriteAsync($"Request recieved at: {context.Request.Path}");
 });
 
 app.Run();
