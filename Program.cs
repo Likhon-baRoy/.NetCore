@@ -1,25 +1,29 @@
+using Microsoft.AspNetCore.Rewrite;
+
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 
-app.MapGet("/", async context =>
+app.Use(async (context, next) =>
 {
-  await context.Response.WriteAsync("This is Home route\n");
+  Console.WriteLine($"\nMethod:\t\t {context.Request.Method}\nPath:\t\t{context.Request.Path}\nStatusCode:\t\t{context.Response.StatusCode}\n");
+
+  var endpoint = context.GetEndpoint();
+
+  if (endpoint != null)
+  {
+    Console.WriteLine($"Matched endpoint: {endpoint.DisplayName}");
+  }
+  else
+  {
+    Console.WriteLine("No endpoint matched");
+  }
+
+  await next();
 });
 
-app.MapGet("/map", async context =>
-{
-  await context.Response.WriteAsync("This is Map route\n");
-});
+app.UseRewriter(new RewriteOptions().AddRedirect("history", "about"));
 
-app.MapGet("/about", async context =>
-{
-  await context.Response.WriteAsync("This is About route\n");
-});
-
-// Fallback when no other route matches
-app.MapFallback(async context =>
-{
-  await context.Response.WriteAsync($"Request recieved at: {context.Request.Path}");
-});
+app.MapGet("/", () => "Hello World!");
+app.MapGet("/about", () => "Contos was founded in 2000.");
 
 app.Run();
