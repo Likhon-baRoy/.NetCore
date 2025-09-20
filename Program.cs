@@ -25,5 +25,11 @@ app.UseRewriter(new RewriteOptions().AddRedirect("history", "about"));
 
 app.MapGet("/", () => "Hello World!");
 app.MapGet("/about", () => "Contos was founded in 2000.");
+app.MapGet("/files/{filename}.{extension}", async (HttpContext context) =>
+{
+  string? filename = Convert.ToString(context.Request.RouteValues["filename"]);
+  string? extension = Convert.ToString(context.Request.RouteValues["extension"]);
+  await context.Response.WriteAsync($"This in files: {filename} - {extension}");
+});
 
 app.Run();
