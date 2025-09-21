@@ -31,5 +31,15 @@ app.MapGet("/files/{filename}.{extension}", async (HttpContext context) =>
   string? extension = Convert.ToString(context.Request.RouteValues["extension"]);
   await context.Response.WriteAsync($"This in files: {filename} - {extension}");
 });
+app.MapGet("/employee/profile/{EmployeeName=Likhon}", async context => // Parameter does not matter in name convention
+{
+  string? employeeName = Convert.ToString(context.Request.RouteValues["employeename"]);
+  await context.Response.WriteAsync($"In Employee profile, Emploee Name: {employeeName}");
+});
+app.MapGet("products/details/{id=1}", async context =>
+{
+  int id = Convert.ToInt32(context.Request.RouteValues["id"]);
+  await context.Response.WriteAsync($"Products details - {id}");
+});
 
 app.Run();
