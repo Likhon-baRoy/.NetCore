@@ -31,12 +31,19 @@ app.MapGet("/files/{filename}.{extension}", async (HttpContext context) =>
   string? extension = Convert.ToString(context.Request.RouteValues["extension"]);
   await context.Response.WriteAsync($"This in files: {filename} - {extension}");
 });
-app.MapGet("/employee/profile/{EmployeeName=Likhon}", async context => // Parameter does not matter in name convention
+app.MapGet("/employee/profile/{EmployeeName=likhon}", async context => // Parameter does not matter in name convention
 {
-  string? employeeName = Convert.ToString(context.Request.RouteValues["employeename"]);
-  await context.Response.WriteAsync($"In Employee profile, Emploee Name: {employeeName}");
+  if (context.Request.RouteValues.ContainsKey("employeename"))
+  {
+    string? employeeName = Convert.ToString(context.Request.RouteValues["employeename"]);
+    await context.Response.WriteAsync($"In Employee profile, Emploee Name: {employeeName}");
+  }
+  else
+  {
+    await context.Response.WriteAsync("In /Employee profle, But Emloyee Name is not supplied in route parameter.");
+  }
 });
-app.MapGet("products/details/{id?}", async context =>
+app.MapGet("products/details/{id:int?}", async context =>
 {
   if (context.Request.RouteValues.ContainsKey("id"))
   {
@@ -46,6 +53,20 @@ app.MapGet("products/details/{id?}", async context =>
   else
   {
     await context.Response.WriteAsync($"Products details - /id is not supplied");
+  }
+});
+
+// Eg: daily-digest-report/{reportdate}
+app.MapGet("/daily-digest-report/{reportdate:datetime?}", async context =>
+{
+  if (context.Request.RouteValues.ContainsKey("reportdate"))
+  {
+    DateTime reportDate = Convert.ToDateTime(context.Request.RouteValues["reportdate"]);
+    await context.Response.WriteAsync($"In daily-digest-report - {reportDate.ToShortDateString()}");
+  }
+  else
+  {
+    await context.Response.WriteAsync("In daily-digest-report/{reportdate}, but reportdate is not provided");
   }
 });
 
