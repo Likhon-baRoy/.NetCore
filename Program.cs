@@ -70,4 +70,16 @@ app.MapGet("/daily-digest-report/{reportdate:datetime?}", async context =>
   }
 });
 
+// Eg: cities/cityid
+app.MapGet("cities/{cityid:guid}", async context =>
+{
+  Guid cityid = Guid.Parse(Convert.ToString(context.Request.RouteValues["cityid"])!);
+  await context.Response.WriteAsync($"City information - {cityid}");
+});
+
+app.MapFallback(async context =>
+{
+  await context.Response.WriteAsync($"Request recieved at [MapFallback] - {context.Request.Path}");
+});
+
 app.Run();
