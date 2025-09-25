@@ -24,14 +24,14 @@ app.Use(async (context, next) =>
 app.UseRewriter(new RewriteOptions().AddRedirect("history", "about"));
 
 app.MapGet("/", () => "Hello World!");
-app.MapGet("/about/{username:length(3,5)}", () => "Contos was founded in 2000."); // here minlength=3, maxlength=5
+app.MapGet("/about/{username:length(5)}", () => "Contos was founded in 2000."); // exact match of specified length
 app.MapGet("/files/{filename}.{extension}", async (HttpContext context) =>
 {
   string? filename = Convert.ToString(context.Request.RouteValues["filename"]);
   string? extension = Convert.ToString(context.Request.RouteValues["extension"]);
   await context.Response.WriteAsync($"This in files: {filename} - {extension}");
 });
-app.MapGet("/employee/profile/{EmployeeName:minlength(3):maxlength(8)=likhon}", async context => // Parameter does not matter in name convention
+app.MapGet("/employee/profile/{EmployeeName:length(4,15):alpha=likhon}", async context => // Parameter does not matter in name convention
 {
   if (context.Request.RouteValues.ContainsKey("employeename"))
   {
@@ -43,7 +43,7 @@ app.MapGet("/employee/profile/{EmployeeName:minlength(3):maxlength(8)=likhon}", 
     await context.Response.WriteAsync("In /Employee profle, But Emloyee Name is not supplied in route parameter.");
   }
 });
-app.MapGet("products/details/{id:int?}", async context =>
+app.MapGet("products/details/{id:int:range(1,101)?}", async context =>
 {
   if (context.Request.RouteValues.ContainsKey("id"))
   {
