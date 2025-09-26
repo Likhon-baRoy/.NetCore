@@ -1,6 +1,13 @@
 using Microsoft.AspNetCore.Rewrite;
+using WebApp.CustomConstraints;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddRouting(options =>
+{
+  options.ConstraintMap.Add("months", typeof(MonthsCustomConstraint));
+});
+
 var app = builder.Build();
 
 app.Use(async (context, next) =>
@@ -77,9 +84,17 @@ app.MapGet("cities/{cityid:guid}", async context =>
   await context.Response.WriteAsync($"City information - {cityid}");
 });
 
+// sales-report/2030/apr
+app.MapGet("/sales-report/{year:int:min(1900)}/{month:months}", async context =>
+{
+  int year = Convert.ToInt32(context.Request.RouteValues["year"]);
+  string? month = Convert.ToString(context.Request.RouteValues["month"]);
+  await context.Response.WriteAsync($"Sales Report - {year} - {month}");
+});
+
 app.MapFallback(async context =>
 {
-  await context.Response.WriteAsync($"Request recieved at [MapFallback] - {context.Request.Path}");
+  await context.Response.WriteAsync($"No route matched at - {context.Request.Path}");
 });
 
 app.Run();
