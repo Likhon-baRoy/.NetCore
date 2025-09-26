@@ -1,20 +1,9 @@
-using Microsoft.Extensions.FileProviders;
+var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddControllers(); // adds all the Controller classes as services
 
-var builder = WebApplication.CreateBuilder(new WebApplicationOptions()
-{
-  WebRootPath = "myroot"
-});
 var app = builder.Build();
 
-app.UseStaticFiles(); // works with the web root path (myroot)
-app.UseStaticFiles(new StaticFileOptions()
-{
-  FileProvider = new PhysicalFileProvider(
-    Path.Combine(builder.Environment.ContentRootPath, "mywebroot")
-  )
-}); // works with "mywebroot"
-
-app.MapGet("/", () => "Hello World!");
+app.MapControllers();
 
 app.MapFallback(async context =>
 {
