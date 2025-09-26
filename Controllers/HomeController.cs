@@ -7,9 +7,9 @@ namespace WebApp.Controllers
         // GET: HomeController
         [Route("home")] // one url for method1()
         [Route("/")] // another url for method1()
-        public string Index()
+        public ContentResult Index()
         {
-            return "Hello from Index\n";
+            return Content("<h1>Welcome</h1> <h2>Hello from Index</h2>", "text/html");
         }
 
         [Route("about")]
