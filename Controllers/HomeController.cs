@@ -13,37 +13,32 @@ namespace WebApp.Controllers
             // Book Id should be supplied
             if (!Request.Query.ContainsKey("bookid"))
             {
-                Response.StatusCode = 400;
-                return Content("Book id is not supplied");
+                return BadRequest("Book id is not supplied"); // Response.StatusCode = 400;
             }
 
             // Book Id can't be empty
             if (string.IsNullOrEmpty(Convert.ToString(Request.Query["bookid"])))
             {
-                Response.StatusCode = 400;
-                return Content("Book Id can't be null or empty");
+                return BadRequest("Book Id can't be null or empty");
             }
 
             // Book id should be between 1 to 1000
             int bokId = Convert.ToInt16(ControllerContext.HttpContext.Request.Query["bookid"]);
 
-            if (bokId < 1)
+            if (bokId <= 0)
             {
-                Response.StatusCode = 400;
-                return Content("Booking Id can't be less than or equal to zero");
+                return BadRequest("Book Id can't be less than or equal to zero");
             }
 
             if (bokId > 1000)
             {
-                Response.StatusCode = 400;
-                return Content("Book Id can't be greater than 1000");
+                return NotFound("Book Id can't be greater than 1000"); // Response.StatusCode = 404;
             }
 
             // isloggedin should be true
             if (Convert.ToBoolean(Request.Query["isloggedin"]) == false)
             {
-                Response.StatusCode = 401;
-                return Content("User must be authenticated");
+                return Unauthorized("User must be authenticated"); // Response.StatusCode = 401;
             }
 
             return File("/sample.pdf", "application/pdf");
