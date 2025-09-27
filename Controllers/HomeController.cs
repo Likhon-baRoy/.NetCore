@@ -45,7 +45,10 @@ namespace WebApp.Controllers
             // return RedirectToActionPermanent("Books", "Store", new { id = bookId }); // 301 - Moved Permanently
 
             // return LocalRedirect($"store/books/{bookId}"); // 302 - Found
-            return LocalRedirectPermanent($"/store/books/{bookId}"); // 301 - Moved Permanently
+            // return LocalRedirectPermanent($"/store/books/{bookId}"); // 301 - Moved Permanently
+
+            // return Redirect($"store/books/{bookId}");
+            return RedirectPermanent($"store/books/{bookId}");
         }
     }
 }
