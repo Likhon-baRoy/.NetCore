@@ -23,14 +23,14 @@ namespace WebApp.Controllers
             }
 
             // Book id should be between 1 to 1000
-            int bokId = Convert.ToInt16(ControllerContext.HttpContext.Request.Query["bookid"]);
+            int bookId = Convert.ToInt16(ControllerContext.HttpContext.Request.Query["bookid"]);
 
-            if (bokId <= 0)
+            if (bookId <= 0)
             {
                 return BadRequest("Book Id can't be less than or equal to zero");
             }
 
-            if (bokId > 1000)
+            if (bookId > 1000)
             {
                 return NotFound("Book Id can't be greater than 1000"); // Response.StatusCode = 404;
             }
@@ -41,8 +41,11 @@ namespace WebApp.Controllers
                 return Unauthorized("User must be authenticated"); // Response.StatusCode = 401;
             }
 
-            // return RedirectToAction("Books", "Store", new { }); // 302 - Found
-            return RedirectToActionPermanent("Books", "Store", new { }); // 301 - Moved Permanently
+            // return RedirectToAction("Books", "Store", new { id = bookId }); // 302 - Found
+            // return RedirectToActionPermanent("Books", "Store", new { id = bookId }); // 301 - Moved Permanently
+
+            // return LocalRedirect($"store/books/{bookId}"); // 302 - Found
+            return LocalRedirectPermanent($"/store/books/{bookId}"); // 301 - Moved Permanently
         }
     }
 }
