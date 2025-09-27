@@ -5,60 +5,48 @@ namespace WebApp.Controllers
 {
     public class HomeController : Controller
     {
-        // GET: HomeController
-        [Route("home")] // one url for method1()
-        [Route("/")] // another url for method1()
-        public ContentResult Index()
-        {
-            return Content("<h1>Welcome</h1> <h2>Hello from Index</h2>", "text/html");
-        }
+        // we're expecting url: http://localhost:5049/book?isloggedin=true&bookid=1
 
-        [Route("person")]
-        public JsonResult Person()
+        [Route("book")]
+        public IActionResult Index()
         {
-            Person person = new Person()
+            // Book Id should be supplied
+            if (!Request.Query.ContainsKey("bookid"))
             {
-                Id = Guid.NewGuid(),
-                FirstName = "James",
-                LastName = "Bond",
-                Age = 27
-            };
+                Response.StatusCode = 400;
+                return Content("Book id is not supplied");
+            }
 
-            return Json(person);
-        }
+            // Book Id can't be empty
+            if (string.IsNullOrEmpty(Convert.ToString(Request.Query["bookid"])))
+            {
+                Response.StatusCode = 400;
+                return Content("Book Id can't be null or empty");
+            }
 
-        [Route("file-download")]
-        public VirtualFileResult FileDownload() // if file is inside of wwwroot folder
-        {
-            // return new VirtualFileResult("/sample.pdf", "application/pdf");
+            // Book id should be between 1 to 1000
+            int bokId = Convert.ToInt16(ControllerContext.HttpContext.Request.Query["bookid"]);
+
+            if (bokId < 1)
+            {
+                Response.StatusCode = 400;
+                return Content("Booking Id can't be less than or equal to zero");
+            }
+
+            if (bokId > 1000)
+            {
+                Response.StatusCode = 400;
+                return Content("Book Id can't be greater than 1000");
+            }
+
+            // isloggedin should be true
+            if (Convert.ToBoolean(Request.Query["isloggedin"]) == false)
+            {
+                Response.StatusCode = 401;
+                return Content("User must be authenticated");
+            }
+
             return File("/sample.pdf", "application/pdf");
         }
-
-        [Route("file-download2")]
-        public PhysicalFileResult FileDownload2() // if file is outside of wwwroot folder
-        {
-            // return new PhysicalFileResult("/home/likhon/likhon.pdf", "application/pdf"); // have to provide the full path
-            return PhysicalFile("/home/likhon/likhon.pdf", "application/pdf");
-        }
-
-        [Route("file-download3")]
-        public FileContentResult FileDownload3() // if is loaded from another data source as byte array as low level data
-        {
-            byte[] bytes = System.IO.File.ReadAllBytes("/home/likhon/likhon.pdf");
-            // return new FileContentResult(bytes, "application/pdf");
-            return File(bytes, "application/pdf");
-        }
-
-        [Route("contact-us/{mobile:regex(^\\d{{10}}$)}")] // only Digit & exactly 10 number
-        public string Contact()
-        {
-            return "Hello from Contact";
-        }
-
-        // public ActionResult Index()
-        // {
-        //     return View();
-        // }
-
     }
 }
