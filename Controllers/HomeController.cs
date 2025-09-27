@@ -5,9 +5,9 @@ namespace WebApp.Controllers
 {
     public class HomeController : Controller
     {
-        // we're expecting url: http://localhost:5049/book?isloggedin=true&bookid=1
+        // we're expecting url: http://localhost:5049/bookstore?isloggedin=true&bookid=1
 
-        [Route("book")]
+        [Route("bookstore")]
         public IActionResult Index()
         {
             // Book Id should be supplied
@@ -41,7 +41,8 @@ namespace WebApp.Controllers
                 return Unauthorized("User must be authenticated"); // Response.StatusCode = 401;
             }
 
-            return File("/sample.pdf", "application/pdf");
+            // return new RedirectToActionResult("Books", "Store", new { }); // 302 - Found
+            return new RedirectToActionResult("Books", "Store", new { }, true); // 301 - Moved Permanently
         }
     }
 }
