@@ -41,8 +41,8 @@ namespace WebApp.Controllers
                 return Unauthorized("User must be authenticated"); // Response.StatusCode = 401;
             }
 
-            // return new RedirectToActionResult("Books", "Store", new { }); // 302 - Found
-            return new RedirectToActionResult("Books", "Store", new { }, true); // 301 - Moved Permanently
+            // return RedirectToAction("Books", "Store", new { }); // 302 - Found
+            return RedirectToActionPermanent("Books", "Store", new { }); // 301 - Moved Permanently
         }
     }
 }
