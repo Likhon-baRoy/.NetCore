@@ -8,7 +8,7 @@ namespace WebApp.Controllers
         // url: http://localhost:5049/bookstore/false/1?isloggedin=true&bookid=10
 
         [Route("bookstore/{isloggedin?}/{bookid?}")]
-        public IActionResult Index(int? bookid, bool? isloggedin)
+        public IActionResult Index([FromQuery]int? bookid, [FromRoute]bool? isloggedin)
         {
             // Book Id should be supplied & can't be empty
             if (bookid.HasValue == false)
