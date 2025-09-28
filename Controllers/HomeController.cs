@@ -8,7 +8,7 @@ namespace WebApp.Controllers
         // url: http://localhost:5049/bookstore/false/1?isloggedin=true&bookid=10
 
         [Route("bookstore/{isloggedin?}/{bookid?}")]
-        public IActionResult Index([FromQuery]int? bookid, [FromRoute]bool? isloggedin)
+        public IActionResult Index([FromQuery]int? bookid, [FromRoute]bool? isloggedin, Book book)
         {
             // Book Id should be supplied & can't be empty
             if (bookid.HasValue == false)
@@ -33,7 +33,7 @@ namespace WebApp.Controllers
                 return Unauthorized("User must be authenticated"); // Response.StatusCode = 401;
             }
 
-            return Content($"Book id: {bookid}", "text/plain");
+            return Content($"Book id: {bookid}, Book: {book}", "text/plain");
         }
     }
 }
