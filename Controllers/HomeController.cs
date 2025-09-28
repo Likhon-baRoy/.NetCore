@@ -10,16 +10,8 @@ namespace WebApp.Controllers
         {
             if (!ModelState.IsValid)
             {
-                List<string> errorsList = new List<string>();
+                string errors = string.Join('\n', ModelState.Values.SelectMany(value => value.Errors).Select(err => err.ErrorMessage));
 
-                foreach (var values in ModelState.Values)
-                {
-                    foreach (var error in values.Errors)
-                    {
-                        errorsList.Add(error.ErrorMessage);
-                    }
-                }
-                string errors = string.Join('\n', errorsList);
                 return BadRequest(errors);
             }
 
