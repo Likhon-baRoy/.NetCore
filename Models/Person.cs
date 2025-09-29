@@ -1,13 +1,14 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using WebApp.CustomValidators;
 
 namespace WebApp.Models;
 
 public class Person
 {
   [Required(ErrorMessage = "{0} can't be empty or null")]
-  [DisplayName("Person Name")]
+  [Display(Name = "Person Name", Prompt = "Enter the person full name", Description = "For registration we've to keep person name record")]
   [StringLength(40, MinimumLength = 4, ErrorMessage = "{0} should be between {2} to {1} characters long")]
   [RegularExpression("^[A-Za-z .]*$", ErrorMessage = "{0} should contain only alphabets, space and dot (.)")]
   public string? PersonName { get; set; }
@@ -29,6 +30,9 @@ public class Person
   [ValidateNever] // if surpass the validation for specific field!
   [Range(0, 999.99, ErrorMessage = "{0} range should be between ${1} and ${2}")]
   public string? Price { get; set; }
+
+  [MinimumYearValidator(2005, ErrorMessage = "{0} should not be newer than Jan 01, {1}")]
+  public DateTime? DateOfBirth { get; set; }
 
   public override string ToString()
   {
