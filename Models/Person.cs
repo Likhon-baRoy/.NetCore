@@ -1,11 +1,10 @@
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using WebApp.CustomValidators;
 
 namespace WebApp.Models;
 
-public class Person
+public class Person : IValidatableObject
 {
   [Required(ErrorMessage = "{0} can't be empty or null")]
   [Display(Name = "Person Name", Prompt = "Enter the person full name", Description = "For registration we've to keep person name record")]
@@ -33,6 +32,7 @@ public class Person
 
   [MinimumYearValidator(2005, ErrorMessage = "{0} should not be newer than Jan 01, {1}")]
   public DateTime? DateOfBirth { get; set; }
+  public int? Age { get; set; }
   public DateTime FromDate { get; set; }
 
   [DateRangeValidator("FromDate", ErrorMessage = "{0} should be older than or equal to {1}")]
@@ -41,5 +41,13 @@ public class Person
   public override string ToString()
   {
     return $"Person object -\nPerson Name: {PersonName}\nEmail: {Email}\nPhone: {Phone}\nPassword: {Password}\nConfirm Password: {ConfirmPassword}\nPrice: {Price}\n";
+  }
+
+  public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+  {
+    if (DateOfBirth.HasValue == false && Age.HasValue == false)
+    {
+      yield return new ValidationResult("Either of DateOfBirth or Age should be supplied", new[] { nameof(Age) });
+    }
   }
 }
