@@ -40,7 +40,7 @@ public class Person : IValidatableObject
 
   [DateRangeValidator("FromDate", ErrorMessage = "{0} should be older than or equal to {1}")]
   public DateTime ToDate { get; set; }
-
+  public List<string?> Tags { get; set; } = new List<string?>();
   public override string ToString()
   {
     return $"Person object -\nPerson Name: {PersonName}\nEmail: {Email}\nPhone: {Phone}\nPassword: {Password}\nConfirm Password: {ConfirmPassword}\nPrice: {Price}\n";

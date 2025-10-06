@@ -8,7 +8,7 @@ namespace WebApp.Controllers
     {
         [Route("register")]
         // public IActionResult Index([Bind(nameof(Person.PersonName), nameof(Person.Email), nameof(Person.Password), nameof(Person.ConfirmPassword))] Person person) // uses of Bind[] method
-        public IActionResult Index([FromBody] Person person)
+        public IActionResult Index(Person person)
         {
             if (!ModelState.IsValid)
             {

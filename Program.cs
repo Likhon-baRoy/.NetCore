@@ -1,10 +1,7 @@
 using WebApp.CustomModelBinders;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddControllers(options =>
-{
-  options.ModelBinderProviders.Insert(0, new PersonBinderProvider());
-}); // adds all the Controller classes as services
+builder.Services.AddControllers(); // adds all the Controller classes as services
 
 var app = builder.Build();
 
