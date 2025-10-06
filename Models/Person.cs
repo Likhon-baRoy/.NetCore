@@ -29,7 +29,7 @@ public class Person : IValidatableObject
 
   [ValidateNever] // if surpass the validation for specific field!
   [Range(0, 999.99, ErrorMessage = "{0} range should be between ${1} and ${2}")]
-  public string? Price { get; set; }
+  public double? Price { get; set; }
 
   [MinimumYearValidator(2005, ErrorMessage = "{0} should not be newer than Jan 01, {1}")]
   public DateTime? DateOfBirth { get; set; }

@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using WebApp.Controllers.CustomModelBinders;
 using WebApp.Models;
 
 namespace WebApp.Controllers
@@ -7,7 +8,7 @@ namespace WebApp.Controllers
     {
         [Route("register")]
         // public IActionResult Index([Bind(nameof(Person.PersonName), nameof(Person.Email), nameof(Person.Password), nameof(Person.ConfirmPassword))] Person person) // uses of Bind[] method
-        public IActionResult Index([FromBody] Person person)
+        public IActionResult Index([FromBody] [ModelBinder(BinderType = typeof(PersonModelBinder))] Person person)
         {
             if (!ModelState.IsValid)
             {
