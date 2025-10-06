@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using WebApp.Models;
 
-namespace WebApp.Controllers.CustomModelBinders;
+namespace WebApp.CustomModelBinders;
 
 public class PersonModelBinder : IModelBinder
 {

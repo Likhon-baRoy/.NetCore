@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using WebApp.Controllers.CustomModelBinders;
+using WebApp.CustomModelBinders;
 using WebApp.Models;
 
 namespace WebApp.Controllers
