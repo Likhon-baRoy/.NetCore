@@ -4,6 +4,7 @@ namespace RazorView.Controllers
 {
     public class HomeController : Controller
     {
+        [Route("/")]
         [Route("home")]
         public ActionResult Index()
         {

@@ -1,11 +1,87 @@
-﻿<!DOCTYPE html>
+﻿@using RazorView.Models
+@using System.Diagnostics
+@{
+    string appTitle = "Asp.Net Core App";
+    Person person = new Person()
+    {
+        Name = "Likhon",
+        DateOfBirth = Convert.ToDateTime("2000-02-14"),
+        PersonGender = Gender.Male
+    };
+
+    List<Person> people = new List<Person>()
+    {
+        new Person()
+        {
+            Name = "John",
+            DateOfBirth = DateTime.Parse("2000-05-06"),
+            PersonGender = Gender.Male
+        },
+        new Person()
+        {
+            Name = "Linda",
+            DateOfBirth = DateTime.Parse("2000-01-09"),
+            PersonGender = Gender.Female
+        },
+        new Person()
+        {
+            Name = "Susan",
+            DateOfBirth = DateTime.Parse("2000-07-12"),
+            PersonGender = Gender.Other
+        }
+    };
+}
+
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Asp.Net Core App</title>
+    <title>@appTitle</title>
 </head>
+
 <body>
-    <h1>Welcome to the Matchine!</h1>
+    <h1>Welcome to the Matchine @person.Name!</h1>
+    @if (person.DateOfBirth.HasValue)
+    {
+        double age = Math.Round((DateTime.Now - person.DateOfBirth).Value.TotalDays / 365.25);
+        <h2>And you are @age years old</h2>
+    }
+    else
+    {
+        <h2>Date of birth is unknown.</h2>
+    }
+
+    @switch (person.PersonGender)
+    {
+        case Gender.Male:
+            <p>November 19th is International Men's Day</p>
+            ;
+            break;
+        case Gender.Female:
+            <p>March 8th is International Women's Day</p>
+            ;
+            break;
+        case Gender.Other:
+            <p>March 31th is International Transgender's Day</p>
+            ;
+            break;
+    }
+
+    @foreach (Person person in people)
+    {
+        @:Hello to @* to show only static text *@
+        <div>
+            @person.Name
+            <span>, </span>
+            <span>@person.PersonGender</span>
+            @if (person.DateOfBirth != null)
+            {
+                <span>@person.DateOfBirth.Value.ToString("MM/dd/yyyy")</span>
+            }
+        </div>
+    }
 </body>
+
 </html>
