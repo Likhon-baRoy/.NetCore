@@ -8,29 +8,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewData["appTitle"]</title>
+    <link rel="stylesheet" href="~/StyleSheet.css">
 </head>
 
 <body>
-    <h1>Welcome to the Matchine</h1>
-    @{
-        List<Person>? people = (List<Person>?)ViewData["people"];
-    }
-
-    @if (people != null)
-    {
-        foreach (Person person in people)
-        {
-            @:Hello to @* to show only static text *@
-            <div>
-                @person.Name,
-                <span>@person.PersonGender, </span>
-            </div>
+    <div class="page-content">
+        <h1>Welcome to the Matchine</h1>
+        @{
+            List<Person>? people = (List<Person>?)ViewData["people"];
         }
-    }
-    else
-    {
-        <h2>No People found!</h2>
-    }
+
+        @if (people != null)
+        {
+            foreach (Person person in people)
+            {
+                <div class="box float-left w-50">
+                <h3>@person.Name</h3>
+                    <table class="table w-100">
+                        <tbody>
+                            <tr>
+                                <td>Gender</td>
+                                <td>@person.PersonGender</td>
+                            </tr>
+                            <tr>
+                                <td>Date of Birth</td>
+                                <td>@person.DateOfBirth.Value.ToString("MM/dd/yyyy")</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            }
+        }
+        else
+        {
+            <h2>No People found!</h2>
+        }
+    </div>
 </body>
 
 </html>
