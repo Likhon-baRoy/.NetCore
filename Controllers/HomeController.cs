@@ -33,9 +33,9 @@ namespace RazorView.Controllers
             };
 
             // ViewData["people"] = people;
-            ViewBag.people = people;
+            // ViewBag.people = people;
 
-            return View();
+            return View(people);
         }
 
     }

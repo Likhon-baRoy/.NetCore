@@ -1,5 +1,6 @@
 ﻿@using RazorView.Models
 @using System.Diagnostics
+@model IEnumerable<Person>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -15,9 +16,9 @@
     <div class="page-content">
         <h1>Welcome to the Matchine</h1>
 
-        @if (ViewBag.people != null)
+        @if (Model.Any())
         {
-            foreach (Person person in ViewBag.people)
+            foreach (Person person in Model)
             {
                 <div class="box float-left w-50">
                 <h3>@person.Name</h3>
