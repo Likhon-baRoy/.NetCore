@@ -27,12 +27,13 @@ namespace RazorView.Controllers
                 new Person()
                 {
                     Name = "Susan",
-                    DateOfBirth = DateTime.Parse("2000-07-12"),
+                    DateOfBirth = null,
                     PersonGender = Gender.Other
                 }
             };
 
-            ViewData["people"] = people;
+            // ViewData["people"] = people;
+            ViewBag.people = people;
 
             return View();
         }
