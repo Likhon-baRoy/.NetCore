@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using RazorView.Models;
 
 namespace RazorView.Controllers
 {
@@ -8,8 +9,32 @@ namespace RazorView.Controllers
         [Route("home")]
         public ActionResult Index()
         {
-            return View(); // Views/Home/Index.cshtml
-            // return View("abc"); // Views/Home/abc.cshtml
+            ViewData["appTitle"] = "Asp.Net Core App";
+            List<Person> people = new List<Person>()
+            {
+                new Person()
+                {
+                    Name = "John",
+                    DateOfBirth = DateTime.Parse("2000-05-06"),
+                    PersonGender = Gender.Male
+                },
+                new Person()
+                {
+                    Name = "Linda",
+                    DateOfBirth = DateTime.Parse("2000-01-09"),
+                    PersonGender = Gender.Female
+                },
+                new Person()
+                {
+                    Name = "Susan",
+                    DateOfBirth = DateTime.Parse("2000-07-12"),
+                    PersonGender = Gender.Other
+                }
+            };
+
+            ViewData["people"] = people;
+
+            return View();
         }
 
     }

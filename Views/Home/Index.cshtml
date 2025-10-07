@@ -1,53 +1,5 @@
 ﻿@using RazorView.Models
 @using System.Diagnostics
-@{
-    string appTitle = "Asp.Net Core App";
-    Person person = new Person()
-    {
-        Name = "Likhon",
-        DateOfBirth = Convert.ToDateTime("2000-02-14"),
-        PersonGender = Gender.Male
-    };
-
-    List<Person> people = new List<Person>()
-    {
-        new Person()
-        {
-            Name = "John",
-            DateOfBirth = DateTime.Parse("2000-05-06"),
-            PersonGender = Gender.Male
-        },
-        new Person()
-        {
-            Name = "Linda",
-            DateOfBirth = DateTime.Parse("2000-01-09"),
-            PersonGender = Gender.Female
-        },
-        new Person()
-        {
-            Name = "Susan",
-            DateOfBirth = DateTime.Parse("2000-07-12"),
-            PersonGender = Gender.Other
-        }
-    };
-
-    string alertMessage = $"<script>alert('{people.Count}')</script>";
-}
-
-@{
-    // local function
-    double? GetAge(DateTime? dateOfBirth)
-    {
-        if (dateOfBirth is not null)
-        {
-            return Math.Round((DateTime.Now - dateOfBirth.Value).TotalDays / 365.25);
-        }
-        else
-        {
-            return null;
-        }
-    }
-}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -55,49 +7,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@appTitle</title>
+    <title>@ViewData["appTitle"]</title>
 </head>
 
 <body>
-    @Html.Raw(alertMessage)
-    <h1>Welcome to the Matchine @person.Name!</h1>
-    @if (person.DateOfBirth.HasValue)
+    <h1>Welcome to the Matchine</h1>
+    @{
+        List<Person>? people = (List<Person>?)ViewData["people"];
+    }
+
+    @if (people != null)
     {
-        <h2>And you are @GetAge(person.DateOfBirth) years old</h2>
+        foreach (Person person in people)
+        {
+            @:Hello to @* to show only static text *@
+            <div>
+                @person.Name,
+                <span>@person.PersonGender, </span>
+            </div>
+        }
     }
     else
     {
-        <h2>Date of birth is unknown.</h2>
-    }
-
-    @switch (person.PersonGender)
-    {
-        case Gender.Male:
-            <p>November 19th is International Men's Day</p>
-            ;
-            break;
-        case Gender.Female:
-            <p>March 8th is International Women's Day</p>
-            ;
-            break;
-        case Gender.Other:
-            <p>March 31th is International Transgender's Day</p>
-            ;
-            break;
-    }
-
-    @foreach (Person person in people)
-    {
-        @:Hello to @* to show only static text *@
-        <div>
-            @person.Name,
-            <span>@person.PersonGender, </span>
-            @if (person.DateOfBirth != null)
-            {
-                <span>@person.DateOfBirth.Value.ToString("MM/dd/yyyy"), </span>
-                <span>@GetAge(person.DateOfBirth) years old</span>
-            }
-        </div>
+        <h2>No People found!</h2>
     }
 </body>
 
