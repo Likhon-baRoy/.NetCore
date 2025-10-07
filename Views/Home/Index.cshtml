@@ -32,6 +32,21 @@
     };
 }
 
+@{
+    // local function
+    double? GetAge(DateTime? dateOfBirth)
+    {
+        if (dateOfBirth is not null)
+        {
+            return Math.Round((DateTime.Now - dateOfBirth.Value).TotalDays / 365.25);
+        }
+        else
+        {
+            return null;
+        }
+    }
+}
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -45,8 +60,7 @@
     <h1>Welcome to the Matchine @person.Name!</h1>
     @if (person.DateOfBirth.HasValue)
     {
-        double age = Math.Round((DateTime.Now - person.DateOfBirth).Value.TotalDays / 365.25);
-        <h2>And you are @age years old</h2>
+        <h2>And you are @GetAge(person.DateOfBirth) years old</h2>
     }
     else
     {
@@ -73,12 +87,12 @@
     {
         @:Hello to @* to show only static text *@
         <div>
-            @person.Name
-            <span>, </span>
-            <span>@person.PersonGender</span>
+            @person.Name,
+            <span>@person.PersonGender, </span>
             @if (person.DateOfBirth != null)
             {
-                <span>@person.DateOfBirth.Value.ToString("MM/dd/yyyy")</span>
+                <span>@person.DateOfBirth.Value.ToString("MM/dd/yyyy"), </span>
+                <span>@GetAge(person.DateOfBirth) years old</span>
             }
         </div>
     }
