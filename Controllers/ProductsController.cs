@@ -10,9 +10,11 @@ namespace RazorView.Controllers
       return View();
     }
 
-    [Route("search-products")]
-    public ActionResult Search()
+    [Route("search-products/{ProductID?}")]
+    public ActionResult Search(int? ProductID)
     {
+      ViewBag.Path = "search-products";
+      ViewBag.ProductID = ProductID;
       return View();
     }
 
