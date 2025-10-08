@@ -1,0 +1,36 @@
+﻿@using RazorView.Models
+@model Person
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>@ViewBag.appTitle</title>
+  <link rel="stylesheet" href="~/StyleSheet.css">
+</head>
+
+<body>
+  <div class="page-content">
+    <h1>Person Details</h1>
+    <div class="box">
+      <p>You are viewing detail information of <strong>@Model.Name</strong></p>
+      <table class="table">
+        <tbody>
+          <tr>
+            <td>Gender</td>
+            <td>@Model.PersonGender</td>
+          </tr>
+          <tr>
+            <td>Date of Birth</td>
+            <td>@Model.DateOfBirth?.ToString("MM/dd/yyyy")</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <button class="button-blue-back"><a href="/">Goto Homepage</a></button>
+  </div>
+</body>
+
+</html>
