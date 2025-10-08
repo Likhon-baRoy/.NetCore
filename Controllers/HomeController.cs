@@ -98,5 +98,16 @@ namespace RazorView.Controllers
             return View(personAndProductWrapperModel);
         }
 
+        [Route("about")]
+        public IActionResult About()
+        {
+            return View();
+        }
+
+        [Route("contact-support")]
+        public IActionResult Contact()
+        {
+            return View();
+        }
     }
 }

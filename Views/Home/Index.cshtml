@@ -1,48 +1,37 @@
 ﻿@using System.Diagnostics
 @model IEnumerable<Person>
 
-<!DOCTYPE html>
-<html lang="en">
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Home Page";
+}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.appTitle</title>
-    <link rel="stylesheet" href="~/StyleSheet.css">
-</head>
+<h1>Welcome to the Matchine</h1>
 
-<body>
-    <div class="page-content">
-        <h1>Welcome to the Matchine</h1>
-
-        @if (Model.Any())
-        {
-            foreach (Person person in Model)
-            {
-                <div class="box float-left w-50">
-                    <h3>@person.Name</h3>
-                    <table class="table w-100">
-                        <tbody>
-                            <tr>
-                                <td>Gender</td>
-                                <td>@person.PersonGender</td>
-                            </tr>
-                            <tr>
-                                <td>Date of Birth</td>
-                                <td>@person.DateOfBirth?.ToString("MM/dd/yyyy")</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <button type="button"><a href="/person-details/@person.Name">Details</a></button>
-                </div>
-            }
-            <button type="button"><a href="/person-with-product">Person with Product</a></button>
-        }
-        else
-        {
-            <h2>No People found!</h2>
-        }
-    </div>
-</body>
-
-</html>
+@if (Model.Any())
+{
+    foreach (Person person in Model)
+    {
+        <div class="box float-left w-50">
+            <h3>@person.Name</h3>
+            <table class="table w-100">
+                <tbody>
+                    <tr>
+                        <td>Gender</td>
+                        <td>@person.PersonGender</td>
+                    </tr>
+                    <tr>
+                        <td>Date of Birth</td>
+                        <td>@person.DateOfBirth?.ToString("MM/dd/yyyy")</td>
+                    </tr>
+                </tbody>
+            </table>
+            <button type="button"><a href="/person-details/@person.Name">Details</a></button>
+        </div>
+    }
+    <button type="button"><a href="/person-with-product">Person with Product</a></button>
+}
+else
+{
+    <h2>No People found!</h2>
+}
