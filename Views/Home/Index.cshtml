@@ -21,7 +21,7 @@
             foreach (Person person in Model)
             {
                 <div class="box float-left w-50">
-                <h3>@person.Name</h3>
+                    <h3>@person.Name</h3>
                     <table class="table w-100">
                         <tbody>
                             <tr>
@@ -34,9 +34,10 @@
                             </tr>
                         </tbody>
                     </table>
-                    <a href="/person-details/@person.Name">Details</a>
+                    <button type="button"><a href="/person-details/@person.Name">Details</a></button>
                 </div>
             }
+            <button type="button"><a href="/person-with-product">Person with Product</a></button>
         }
         else
         {
