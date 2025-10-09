@@ -1,6 +1,20 @@
 ﻿@{
-    ViewBag.Title = "Products Order Page";
+    ListModel listModel = new ListModel();
+    listModel.ListTitle = "Country";
+    listModel.ListItems = new List<string>()
+    {
+        "Bangladesh",
+        "India",
+        "Pakistan",
+        "Srilanka",
+        "Nepal",
+        "China",
+        "Russia"
+    };
 }
 
-<h1>Order Product</h1>
-<p>order details here</p>
+@* <h3>@ViewBag.listModel.ListItems</h3> *@
+
+@* <partial name="_ListPartialView" model="listModel"></partial> *@
+
+@* <h1>@Model.ListTitle</h1> *@

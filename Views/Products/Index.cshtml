@@ -1,8 +1,18 @@
 ﻿@{
-    ViewBag.Title = "Products Page";
+    ListModel listModel = new ListModel();
+    listModel.ListTitle = "Products";
+    listModel.ListItems = new List<string>()
+    {
+        "ThinkPad Yoga",
+        "Andriod",
+        "Earphone",
+        "Mobile Charger",
+        "Wallet",
+        "Pen Driver",
+        "Water Bottle"
+    };
 }
 
-<h1>Products</h1>
-<p>products list here</p>
+@* <h3>@ViewBag.listModel.ListItems</h3> *@
 
-<partial name="_ListPartialView"></partial>
+<partial name="_ListPartialView" model="listModel"></partial>

@@ -10,24 +10,3 @@
     remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing
     Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of
     Lorem Ipsum.</p>
-
-@{
-    ViewData["ListTitle"] = "Cities";
-    ViewData["ListItems"] = new List<string>()
-    {
-        "Paris",
-        "Dhaka",
-        "New York",
-        "New Delhi",
-        "Rome"
-    };
-}
-
-<partial name="_ListPartialView" /> @* Returns the content to the parent view *@
-
-@await Html.PartialAsync("_ListPartialView") @* Returns the content to the parent view *@
-
-@{
-    @* Streams the content to the browser *@
-    await Html.RenderPartialAsync("_ListPartialView");
-}

@@ -1,6 +1,14 @@
 ﻿@{
-    ViewBag.Title = "Products Search Page";
+    ListModel listModel = new ListModel();
+    listModel.ListTitle = "Products";
+    listModel.ListItems = new List<string>()
+    {
+        "Paris",
+        "Dhaka",
+        "New York",
+        "New Delhi",
+        "Rome"
+    };
 }
 
-<h1>Search Products</h1>
-<p>search details here</p>
+<partial name="_ListPartialView" model="listModel" /> @* Returns the content to the parent view *@

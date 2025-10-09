@@ -7,18 +7,6 @@ namespace RazorView.Controllers
     [Route("products")]
     public ActionResult Index()
     {
-      ViewData["ListTitle"] = "Products";
-      ViewData["ListItems"] = new List<string>()
-      {
-        "ThinkPad Yoga",
-        "Andriod",
-        "Earphone",
-        "Mobile Charger",
-        "Wallet",
-        "Pen Driver",
-        "Water Bottle"
-      };
-
       return View();
     }
 
