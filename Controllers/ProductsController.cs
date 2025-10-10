@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using RazorView.Models;
 
 namespace RazorView.Controllers
 {
@@ -22,6 +23,26 @@ namespace RazorView.Controllers
     public ActionResult Order()
     {
       return View();
+    }
+
+    [Route("programming-languages")]
+    public IActionResult ProgrammingLanguages()
+    {
+      ListModel listModel = new ListModel()
+      {
+        ListTitle = "Programming Languages List",
+        ListItems = new List<string>()
+        {
+          "C",
+          "C#",
+          "C++",
+          "PHP",
+          "Java",
+          "Python"
+        }
+      };
+
+      return PartialView("_ListPartialView", listModel);
     }
   }
 }
