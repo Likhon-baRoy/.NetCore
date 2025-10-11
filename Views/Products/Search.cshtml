@@ -9,6 +9,32 @@
         "New Delhi",
         "Rome"
     };
+
+    PersonGridModel personGridModel = new PersonGridModel()
+    {
+      GridTitle = "2nd Persons List from GridViewComponent",
+      Persons = [
+        new ()
+        {
+          Name = "Mia",
+          JobTitle = "Developer"
+        },
+        new ()
+        {
+          Name = "Emma",
+          JobTitle = "UI/UX Designer"
+        },
+        new ()
+        {
+          Name = "Avva",
+          JobTitle = "SQA Enginner"
+        }
+      ]
+    };
 }
 
 <partial name="_ListPartialView" model="listModel" /> @* Returns the content to the parent view *@
+
+@await Component.InvokeAsync("Grid", new {
+    grid = personGridModel
+})

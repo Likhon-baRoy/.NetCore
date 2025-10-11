@@ -11,5 +11,59 @@
     Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of
     Lorem Ipsum.</p>
 
-@await Component.InvokeAsync("Grid")
-<vc:grid></vc:grid>
+@{
+    PersonGridModel personGridModel = new PersonGridModel()
+    {
+      GridTitle = "Persons List from GridViewComponent",
+      Persons = new List<Person>()
+      {
+        new Person()
+        {
+          Name = "John",
+          JobTitle = "Manager"
+        },
+        new Person()
+        {
+          Name = "Jones",
+          JobTitle = "Asst. Manager"
+        },
+        new Person()
+        {
+          Name = "William",
+          JobTitle = "Clerk"
+        }
+      }
+    };
+}
+
+@await Component.InvokeAsync("Grid", new {
+    grid = personGridModel
+})
+
+@{
+    PersonGridModel personGridModel2 = new PersonGridModel()
+    {
+      GridTitle = "2nd Persons List from GridViewComponent",
+      Persons = [
+        new ()
+        {
+          Name = "Mia",
+          JobTitle = "Developer"
+        },
+        new ()
+        {
+          Name = "Emma",
+          JobTitle = "UI/UX Designer"
+        },
+        new ()
+        {
+          Name = "Avva",
+          JobTitle = "SQA Enginner"
+        }
+      ]
+    };
+}
+
+@await Component.InvokeAsync("Grid", new {
+    grid = personGridModel2
+})
