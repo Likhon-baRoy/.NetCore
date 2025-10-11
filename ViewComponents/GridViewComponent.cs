@@ -7,7 +7,7 @@ public class GridViewComponent : ViewComponent
 {
   public async Task<IViewComponentResult> InvokeAsync()
   {
-    PersonGridModel model = new PersonGridModel()
+    PersonGridModel personGridModel = new PersonGridModel()
     {
       GridTitle = "Persons List from GridViewComponent",
       Persons = new List<Person>()
@@ -29,7 +29,6 @@ public class GridViewComponent : ViewComponent
         }
       }
     };
-    ViewData["Grid"] = model;
-    return View(); /* Invoked a partial view & path is: Views/Shared/Components/Grid/Default.cshtml */
+    return View(personGridModel); /* Invoked a partial view & path is: Views/Shared/Components/Grid/Default.cshtml */
   }
 }
