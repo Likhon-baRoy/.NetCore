@@ -44,5 +44,25 @@ namespace RazorView.Controllers
 
       return PartialView("_ListPartialView", listModel);
     }
+
+    [Route("friends-list")]
+    public ActionResult LoadFriendsList()
+    {
+      PersonGridModel personGridModel = new PersonGridModel()
+      {
+        GridTitle = "Friends",
+        Persons = new List<Person>
+        {
+          new Person { Name = "Mia", JobTitle = "Developer" },
+          new Person { Name = "Emma", JobTitle = "UI/UX Designer" },
+          new Person { Name = "Avva", JobTitle = "SQA Engineer" }
+        }
+      };
+
+      return ViewComponent("Grid", new
+      {
+        grid = personGridModel
+      });
+    }
   }
 }

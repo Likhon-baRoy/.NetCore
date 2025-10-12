@@ -9,32 +9,17 @@
         "New Delhi",
         "Rome"
     };
-
-    PersonGridModel personGridModel = new PersonGridModel()
-    {
-      GridTitle = "2nd Persons List from GridViewComponent",
-      Persons = [
-        new ()
-        {
-          Name = "Mia",
-          JobTitle = "Developer"
-        },
-        new ()
-        {
-          Name = "Emma",
-          JobTitle = "UI/UX Designer"
-        },
-        new ()
-        {
-          Name = "Avva",
-          JobTitle = "SQA Enginner"
-        }
-      ]
-    };
 }
+
+<button class="button button-blue-black" type="button" id="button-load">Load Friends list</button>
+<div id="list"></div>
 
 <partial name="_ListPartialView" model="listModel" /> @* Returns the content to the parent view *@
 
-@await Component.InvokeAsync("Grid", new {
-    grid = personGridModel
-})
+<script>
+    document.getElementById("button-load").addEventListener("click", async function () {
+        var response = await fetch("friends-list", { method: "GET" });
+        var responseBody = await response.text();
+        document.getElementById("list").innerHTML = responseBody;
+    });
+</script>
