@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "1wLpcdxTZXI=",
+  "success": true,
+  "projectFilePath": "/home/likhon/dotnet/RazorView/Services/Services.csproj",
+  "expectedPackageFiles": [
+    "/home/likhon/.nuget/packages/microsoft.aspnetcore.app.ref/9.0.9/microsoft.aspnetcore.app.ref.9.0.9.nupkg.sha512"
+  ],
+  "logs": []
+}
