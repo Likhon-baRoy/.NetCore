@@ -1,10 +1,18 @@
 using Microsoft.AspNetCore.Mvc;
 using RazorView.Models;
+using Services;
 
 namespace RazorView.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly CitiesService _citiesService;
+
+        public HomeController()
+        {
+            _citiesService = new CitiesService();
+        }
+
         [Route("/")]
         [Route("home")]
         public ActionResult Index()

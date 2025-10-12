@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/likhon/dotnet/RazorView/Services/Services.csproj",
+      "projectUniqueName": "/home/likhon/dotnet/DependencyInjection/Services/Services.csproj",
       "projectName": "Services",
-      "projectPath": "/home/likhon/dotnet/RazorView/Services/Services.csproj",
+      "projectPath": "/home/likhon/dotnet/DependencyInjection/Services/Services.csproj",
       "packagesPath": "/home/likhon/.nuget/packages/",
-      "outputPath": "/home/likhon/dotnet/RazorView/Services/obj/",
+      "outputPath": "/home/likhon/dotnet/DependencyInjection/Services/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/likhon/.nuget/NuGet/NuGet.Config"
