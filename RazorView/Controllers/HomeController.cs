@@ -1,16 +1,17 @@
 using Microsoft.AspNetCore.Mvc;
 using RazorView.Models;
 using Services;
+using ServiceContracts;
 
 namespace RazorView.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly CitiesService _citiesService;
+        private readonly ICitiesService _citiesService;
 
-        public HomeController()
+        public HomeController(ICitiesService citiesService)
         {
-            _citiesService = new CitiesService();
+            _citiesService = citiesService;
         }
 
         [Route("/")]
@@ -115,7 +116,9 @@ namespace RazorView.Controllers
         [Route("contact-support")]
         public IActionResult Contact()
         {
-            return View();
+            List<string> cities = _citiesService.GetCities();
+
+            return View(cities);
         }
     }
 }

@@ -482,3 +482,8 @@ $RECYCLE.BIN/
 
 # Vim temporary swap files
 *.swp
+Services/obj/Debug/net9.0/Services.AssemblyInfoInputs.cache
+Services/obj/Debug/net9.0/Services.AssemblyInfo.cs
+Services/obj/Services.csproj.nuget.dgspec.json
+Services/obj/project.nuget.cache
+Services/obj/project.assets.json

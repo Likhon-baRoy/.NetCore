@@ -1,10 +1,20 @@
-﻿@{
+﻿@model IEnumerable<string>
+
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Contact Support Page";
 }
 
 <h1>Contact</h1>
-<p>contact details here</p>
+
+<ul class="list">
+    @foreach (string city in Model)
+    {
+        <li>@city</li>
+    }
+</ul>
+
+<p>contact details in below footer</p>
 
 @section footer_section
 {

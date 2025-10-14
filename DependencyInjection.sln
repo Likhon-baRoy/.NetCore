@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RazorView", "RazorView\Razo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{1486B266-A2AE-4FB8-82BB-51014329534C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceContracts", "ServiceContracts\ServiceContracts.csproj", "{3C384478-9895-4468-B217-F569EAAC6AC7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{1486B266-A2AE-4FB8-82BB-51014329534C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1486B266-A2AE-4FB8-82BB-51014329534C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1486B266-A2AE-4FB8-82BB-51014329534C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C384478-9895-4468-B217-F569EAAC6AC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C384478-9895-4468-B217-F569EAAC6AC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C384478-9895-4468-B217-F569EAAC6AC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C384478-9895-4468-B217-F569EAAC6AC7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

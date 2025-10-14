@@ -1,11 +1,30 @@
 {
   "version": 3,
   "targets": {
-    "net9.0": {}
+    "net9.0": {
+      "ServiceContracts/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/ServiceContracts.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ServiceContracts.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "ServiceContracts/1.0.0": {
+      "type": "project",
+      "path": "../ServiceContracts/ServiceContracts.csproj",
+      "msbuildProject": "../ServiceContracts/ServiceContracts.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net9.0": []
+    "net9.0": [
+      "ServiceContracts >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "/home/likhon/.nuget/packages/": {}
@@ -31,7 +50,11 @@
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "/home/likhon/dotnet/DependencyInjection/ServiceContracts/ServiceContracts.csproj": {
+              "projectPath": "/home/likhon/dotnet/DependencyInjection/ServiceContracts/ServiceContracts.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
