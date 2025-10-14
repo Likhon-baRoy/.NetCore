@@ -7,12 +7,14 @@ namespace RazorView.Controllers
 {
     public class HomeController : Controller
     {
+        /*
         private readonly ICitiesService _citiesService;
 
         public HomeController(ICitiesService citiesService)
         {
             _citiesService = citiesService;
         }
+        */
 
         [Route("/")]
         [Route("home")]
@@ -114,7 +116,7 @@ namespace RazorView.Controllers
         }
 
         [Route("contact-support")]
-        public IActionResult Contact()
+        public IActionResult Contact([FromServices] ICitiesService _citiesService)
         {
             List<string> cities = _citiesService.GetCities();
 
