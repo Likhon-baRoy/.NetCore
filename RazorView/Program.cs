@@ -8,7 +8,7 @@ builder.Services.Add(new ServiceDescriptor(
 
   typeof(CitiesService),
 
-  ServiceLifetime.Singleton
+  ServiceLifetime.Scoped
 ));
 
 var app = builder.Build();
