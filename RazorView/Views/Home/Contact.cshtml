@@ -1,4 +1,6 @@
-﻿@model IEnumerable<string>
+﻿@using ServiceContracts
+@model IEnumerable<string>
+@inject ICitiesService citiesServiceInView
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -7,8 +9,12 @@
 
 <h1>Contact</h1>
 
+@{
+    List<string> citiesFromServiceInView = citiesServiceInView.GetCities();
+}
+
 <ul class="list">
-    @foreach (string city in Model)
+    @foreach (string city in citiesFromServiceInView)
     {
         <li>@city</li>
     }
@@ -23,6 +29,7 @@
 <div class="box">
     @ViewBag.InstanceId_CitiesService_InScope
 </div>
+<div>@citiesServiceInView.ServiceInstanceId</div>
 
 @section footer_section
 {
