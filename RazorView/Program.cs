@@ -9,6 +9,11 @@ builder.Services.AddScoped<ICitiesService, CitiesService>();
 
 var app = builder.Build();
 
+if (app.Environment.IsDevelopment() || app.Environment.IsStaging() || app.Environment.IsEnvironment("test1") || app.Environment.IsEnvironment("test2"))
+{
+  app.UseDeveloperExceptionPage();
+}
+
 app.UseStaticFiles();
 app.MapControllers();
 
