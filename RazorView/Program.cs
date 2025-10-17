@@ -15,12 +15,6 @@ if (app.Environment.IsDevelopment() || app.Environment.IsStaging() || app.Enviro
 }
 
 app.UseStaticFiles();
-app.Map("/home2", async context =>
-{
-  await context.Response.WriteAsync(app.Configuration["mykey"]! + '\n');
-  await context.Response.WriteAsync(app.Configuration.GetValue<string>("mykey")! + '\n');
-  await context.Response.WriteAsync(app.Configuration.GetValue<int>("x", 10) + "\n");
-});
 app.MapControllers();
 
 app.Run();
