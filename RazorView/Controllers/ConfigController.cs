@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using RazorView.Models;
 
 namespace RazorView.Controllers
 {
@@ -14,14 +15,16 @@ namespace RazorView.Controllers
         [Route("config")]
         public ActionResult Index()
         {
-            // Indipendent statement
-            ViewBag.ClientID = _configuration["weatherAPI:ClientID"];
-            ViewBag.ClientSecret = _configuration.GetValue("weatherAPI:ClientSecret", "The default client secret");
+            // using options object to get specific keys
+            // Options: Loads configuration values into a new Options object
+            WeatherApiOptions options = _configuration.GetSection("weatherAPI").Get<WeatherApiOptions>();
 
-            // using GetSection() method
-            IConfigurationSection wetherapiSection = _configuration.GetSection("weatherAPI");
-            ViewBag.ClientID = wetherapiSection["ClientID"];
-            ViewBag.ClientSecret = wetherapiSection["ClientSecret"];
+            // Bind: Loads configuration values into a new Options object
+            // WeatherApiOptions options = new WeatherApiOptions();
+            // _configuration.GetSection("weatherAPI").Bind(options);
+
+            ViewBag.ClientID = options.ClientID;
+            ViewBag.ClientSecret = options.ClientSecret;
 
             return View();
         }
