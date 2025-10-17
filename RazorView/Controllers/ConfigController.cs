@@ -14,8 +14,15 @@ namespace RazorView.Controllers
         [Route("config")]
         public ActionResult Index()
         {
-            ViewBag.MyKey = _configuration["mykey"];
-            ViewBag.MyAPIKey = _configuration.GetValue("MyAPIKey", "The default key");
+            // Indipendent statement
+            ViewBag.ClientID = _configuration["weatherAPI:ClientID"];
+            ViewBag.ClientSecret = _configuration.GetValue("weatherAPI:ClientSecret", "The default client secret");
+
+            // using GetSection() method
+            IConfigurationSection wetherapiSection = _configuration.GetSection("weatherAPI");
+            ViewBag.ClientID = wetherapiSection["ClientID"];
+            ViewBag.ClientSecret = wetherapiSection["ClientSecret"];
+
             return View();
         }
 
