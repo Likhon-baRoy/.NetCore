@@ -12,6 +12,9 @@ builder.Services.Configure<WeatherApiOptions>(builder.Configuration.GetSection("
 builder.Services.AddScoped<ICitiesService, CitiesService>();
 // builder.Services.AddSingleton<ICitiesService, CitiesService>();
 
+// Load MyOwnConfig.json
+builder.Configuration.AddJsonFile("MyOwnConfig.json", optional: true, reloadOnChange: true);
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment() || app.Environment.IsStaging() || app.Environment.IsEnvironment("test1") || app.Environment.IsEnvironment("test2"))
