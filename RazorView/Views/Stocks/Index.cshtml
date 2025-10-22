@@ -1,0 +1,53 @@
+﻿@model RazorView.Models.Stock
+
+<div class="margin-bottom">
+    <div class="flex" id="top-bar-div">
+        <div class="flex-1" id="app-title-div">
+            <h1 class="app-title">
+                <i class="fa-solid fa-money-bill-trend-up"></i>
+                Stocks
+            </h1>
+        </div>
+        <div class="flex-1">
+            Login
+        </div>
+    </div>
+</div>
+
+<div class="box trading-panel">
+    <div class="flex trading-panel-flex">
+        <div class="stock-price-panel">
+            <div class="stock">
+                <h1 class="stock-title">@Model.StockSymbol</h1>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>Current:</td>
+                            <th><small>$</small>
+                                <span class="price">@Model.CurrentPrice.ToString("N")</span>
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>High:</td>
+                            <th><small>$</small>
+                                <span class="price">@Model.HighestPrice.ToString("N")</span>
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>Low:</td>
+                            <th><small>$</small>
+                                <span class="price">@Model.LowestPrice.ToString("N")</span>
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>Open:</td>
+                            <th><small>$</small>
+                                <span class="price">@Model.OpenPrice.ToString("N")</span>
+                            </th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
