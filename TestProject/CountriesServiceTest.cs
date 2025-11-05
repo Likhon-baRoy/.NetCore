@@ -98,8 +98,7 @@ public class CountriesServiceTest
   public void GetAllCountries_AddFewCountries()
   {
     // Given
-    List<CountryAddRequest> country_request_list = new
-    List<CountryAddRequest>()
+    List<CountryAddRequest> country_request_list = new List<CountryAddRequest>()
     {
       new CountryAddRequest()
       {
