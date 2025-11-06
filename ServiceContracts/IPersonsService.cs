@@ -45,10 +45,17 @@ public interface IPersonsService
   /// <returns>Returns sorted persons as PersonResponse list</returns>
   List<PersonResponse> GetSortedPersons(List<PersonResponse> allPersons, string sortBy, SortOrderOptions sortOrder);
 
-/// <summary>
-/// Updates the specified person details based on the given person ID
-/// </summary>
-/// <param name="personUpdateRequest">Person details to update, including person id</param>
-/// <returns>Returns the person response object after updation</returns>
+  /// <summary>
+  /// Updates the specified person details based on the given person ID
+  /// </summary>
+  /// <param name="personUpdateRequest">Person details to update, including person id</param>
+  /// <returns>Returns the person response object after updation</returns>
   PersonResponse UpdatePerson(PersonUpdateRequest? personUpdateRequest);
+
+  /// <summary>
+  /// Deletes a person based on the given person id
+  /// </summary>
+  /// <param name="PersonID">PersonID to delete</param>
+  /// <returns>Returns true, if the deletion is successful; otherwise false</returns>
+  bool DeletePerson(Guid? personID);
 }
