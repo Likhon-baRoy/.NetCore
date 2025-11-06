@@ -18,6 +18,10 @@ builder.Services.Configure<TradingOptions>(builder.Configuration.GetSection("Tra
 builder.Services.AddScoped<ICitiesService, CitiesService>();
 // builder.Services.AddSingleton<ICitiesService, CitiesService>();
 
+// add services into IoC container
+builder.Services.AddSingleton<ICountriesService, CountriesService>();
+builder.Services.AddSingleton<IPersonsService, PersonsService>();
+
 // Optional config file: load MyOwnConfig.json
 builder.Configuration.AddJsonFile("MyOwnConfig.json", optional: true, reloadOnChange: true);
 

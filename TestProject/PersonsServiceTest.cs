@@ -18,7 +18,7 @@ public class PersonsServiceTest
   public PersonsServiceTest(ITestOutputHelper testOutputHelper)
   {
     _personsService = new PersonsService();
-    _countriesService = new CountriesService();
+    _countriesService = new CountriesService(false);
     _testOutputHelper = testOutputHelper;
   }
 
@@ -657,7 +657,7 @@ public class PersonsServiceTest
     bool isDeleted = _personsService.DeletePerson(Guid.NewGuid());
 
     // Assert
-    Assert.True(isDeleted);
+    Assert.False(isDeleted);
   }
 
   #endregion
