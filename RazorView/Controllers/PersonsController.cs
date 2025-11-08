@@ -6,6 +6,8 @@ using ServiceContracts.Enums;
 
 namespace RazorView.Controllers
 {
+    // Attribute route & Route Tokens
+    [Route("[controller]")] // this act as a common prefix for all the action routes of the same Controller
     public class PersonsController : Controller
     {
         private readonly IPersonsService _personsService;
@@ -17,7 +19,7 @@ namespace RazorView.Controllers
             _countriesService = countriesService;
         }
 
-        [Route("persons/index")]
+        [Route("[action]")]
         public IActionResult Index(string searchBy, string? searchString, string sortBy = nameof(PersonResponse.PersonName), SortOrderOptions sortOrder = SortOrderOptions.ASC)
         {
             // Searching part
@@ -45,7 +47,7 @@ namespace RazorView.Controllers
         }
 
         [HttpGet]
-        [Route("persons/create")]
+        [Route("[action]")]
         public IActionResult Create()
         {
             List<CountryResponse> countries = _countriesService.GetAllCountries();
@@ -55,7 +57,7 @@ namespace RazorView.Controllers
         }
 
         [HttpPost]
-        [Route("persons/create")]
+        [Route("[action]")]
         public IActionResult Create(PersonAddRequest personAddRequest)
         {
             if (!ModelState.IsValid)
