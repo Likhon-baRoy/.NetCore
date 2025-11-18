@@ -95,7 +95,7 @@ namespace RazorView.Controllers
             PersonUpdateRequest personUpdateRequest = personResponse.ToPersonUpdateRequest();
 
             List<CountryResponse> countries = _countriesService.GetAllCountries();
-            ViewBag.countries = countries.Select(temp => new SelectListItem()
+            ViewBag.Countries = countries.Select(temp => new SelectListItem()
             {
                 Text = temp.CountryName,
                 Value = temp.CountryID.ToString()
@@ -125,8 +125,33 @@ namespace RazorView.Controllers
                 List<CountryResponse> countries = _countriesService.GetAllCountries();
                 ViewBag.Countries = countries;
                 ViewBag.Errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList();
-                return View();
+                return View(personUpdateRequest);
             }
+        }
+
+        [HttpGet]
+        [Route("[action]/{personID}")]
+        public IActionResult Delete(Guid? personID)
+        {
+            PersonResponse? personResponse = _personsService.GetPersonByPersonID(personID);
+
+            if (personResponse == null)
+                return RedirectToAction("Index");
+
+            return View(personResponse);
+        }
+
+        [HttpPost]
+        [Route("[action]/{personID}")]
+        public IActionResult Delete(PersonUpdateRequest personUpdateResult)
+        {
+            PersonResponse? personResponse = _personsService.GetPersonByPersonID(personUpdateResult.PersonID);
+
+            if (personResponse == null)
+                return RedirectToAction("Index");
+
+            _personsService.DeletePerson(personResponse.PersonID);
+            return RedirectToAction("Index");
         }
     }
 }
