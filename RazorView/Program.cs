@@ -1,3 +1,5 @@
+using Entities;
+using Microsoft.EntityFrameworkCore;
 using RazorView.Models;
 using RazorView.Services;
 using ServiceContracts;
@@ -21,6 +23,12 @@ builder.Services.AddScoped<ICitiesService, CitiesService>();
 // add services into IoC container
 builder.Services.AddSingleton<ICountriesService, CountriesService>();
 builder.Services.AddSingleton<IPersonsService, PersonsService>();
+
+// Add PersonsDbContext
+builder.Services.AddDbContext<PersonsDbContext>(options =>
+{
+  options.UseSqlServer();
+});
 
 // Optional config file: load MyOwnConfig.json
 builder.Configuration.AddJsonFile("MyOwnConfig.json", optional: true, reloadOnChange: true);
