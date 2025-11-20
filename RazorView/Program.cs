@@ -27,7 +27,7 @@ builder.Services.AddSingleton<IPersonsService, PersonsService>();
 // Add PersonsDbContext
 builder.Services.AddDbContext<PersonsDbContext>(options =>
 {
-  options.UseSqlServer();
+  options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
 // Optional config file: load MyOwnConfig.json
