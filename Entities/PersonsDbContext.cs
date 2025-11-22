@@ -20,7 +20,8 @@ public class PersonsDbContext : DbContext
     modelBuilder.Entity<Person>().ToTable("Persons");
 
     // Seed to Countries
-    string countriesJson = System.IO.File.ReadAllText("countries.json");
+    string basePath = Directory.GetCurrentDirectory(); // Entities folder
+    string countriesJson = System.IO.File.ReadAllText(Path.Combine(basePath, "countries.json"));
     List<Country> countries = System.Text.Json.JsonSerializer.Deserialize<List<Country>>(countriesJson);
 
     foreach (Country country in countries)
@@ -29,7 +30,7 @@ public class PersonsDbContext : DbContext
     }
 
     // Seed to Persons
-    string personJson = System.IO.File.ReadAllText("persons.json");
+    string personJson = System.IO.File.ReadAllText(Path.Combine(basePath, "persons.json"));
     List<Person> persons = System.Text.Json.JsonSerializer.Deserialize<List<Person>>(personJson);
 
     foreach (Person person in persons)

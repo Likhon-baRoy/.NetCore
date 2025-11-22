@@ -3,13 +3,13 @@ using Microsoft.EntityFrameworkCore.Design;
 
 namespace Entities;
 
-public class PersonsDbContextFactory : IDesignTimeDbContextFactory<PersonsDbContext>
+public class Personsdbcontextfactory : IDesignTimeDbContextFactory<PersonsDbContext>
 {
     public PersonsDbContext CreateDbContext(string[] args)
     {
         var builder = new DbContextOptionsBuilder<PersonsDbContext>();
         builder.UseSqlServer(
-            "Server=localhost,1435;Database=PersonsDatabase;User Id=sa;Password=YourStrong@Password1;TrustServerCertificate=True;"
+            "Server=127.0.0.1,1433;Database=PersonsDatabase;User Id=sa;Password=Aa!9274sqlXX#;TrustServerCertificate=True;"
         );
 
         return new PersonsDbContext(builder.Options);
