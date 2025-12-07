@@ -21,8 +21,8 @@ builder.Services.AddScoped<ICitiesService, CitiesService>();
 // builder.Services.AddSingleton<ICitiesService, CitiesService>();
 
 // add services into IoC container
-builder.Services.AddSingleton<ICountriesService, CountriesService>();
-builder.Services.AddSingleton<IPersonsService, PersonsService>();
+builder.Services.AddScoped<ICountriesService, CountriesService>();
+builder.Services.AddScoped<IPersonsService, PersonsService>();
 
 // Add PersonsDbContext
 builder.Services.AddDbContext<PersonsDbContext>(options =>
